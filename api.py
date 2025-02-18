@@ -2,9 +2,10 @@ import joblib
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
+import numpy as np
 
 # Load the trained model
-model = joblib.load('model/model.pkl')
+model = joblib.load("model/model.pkl")
 
 # Define the FastAPI app
 app = FastAPI()
@@ -12,7 +13,6 @@ app = FastAPI()
 # Define input schema
 class InputData(BaseModel):
     CreditScore: int
-    Geography_France: int
     Geography_Germany: int
     Geography_Spain: int
     Gender: int
@@ -31,7 +31,6 @@ def predict(data: InputData):
     input_features = [
         [
             data.CreditScore,
-            data.Geography_France,  # Geography one-hot encoded values
             data.Geography_Germany,
             data.Geography_Spain,
             data.Gender,
@@ -54,9 +53,9 @@ def predict(data: InputData):
 def get_geography_labels():
     return {
         "geography": [
-            {"value": "Germany", "encoding": [1, 0, 0]},
-            {"value": "Spain", "encoding": [0, 1, 0]},
-            {"value": "France", "encoding": [0, 0, 0]}
+            {"value": "Germany", "encoding": [1, 0]},
+            {"value": "Spain", "encoding": [0, 1]},
+            {"value": "France", "encoding": [0, 0]}
         ]
     }
 

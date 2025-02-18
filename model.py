@@ -39,14 +39,13 @@ confusion_matrix(y_test, y_pred)
 accuracy_score(y_test, y_pred)
 
 # K-Fold Cross Validation
-from sklearn.model_selection import cross_val_score
-accuracies = cross_val_score(estimator = model,
-                             X = X,
-                             y = y,
-                             scoring = 'accuracy',
-                             cv = 10)
-print("Average Accuracy: {:.2f} %".format(accuracies.mean()*100))
-print("Standard Deviation: {:.2f} %".format(accuracies.std()*100))
+#accuracies = cross_val_score(estimator = model,
+#                             X = X,
+#                             y = y,
+#                             scoring = 'accuracy',
+#                             cv = 10)
+#print("Average Accuracy: {:.2f} %".format(accuracies.mean()*100))
+#print("Standard Deviation: {:.2f} %".format(accuracies.std()*100))
 
 # Save the trained model as a .pkl file
 joblib.dump(model, 'model/model.pkl')
